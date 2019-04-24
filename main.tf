@@ -8,7 +8,7 @@ resource "aws_acm_certificate" "default" {
 
 resource "aws_route53_record" "validation" {
   provider = "aws.route53_account"
-  count    = "${length(var.subject_alternative_names) + 1}"
+  count    = "${length(var.subject_alternative_names)}"
 
   name    = "${lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_name")}"
   type    = "${lookup(aws_acm_certificate.default.domain_validation_options[count.index], "resource_record_type")}"
